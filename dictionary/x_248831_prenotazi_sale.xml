@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Sale" max_length="40" name="x_248831_prenotazi_sale" type="collection">
+        <element label="Arredamento" max_length="400" name="arredamento" type="string"/>
+        <element label="Indirizzo" max_length="32" name="indirizzo" reference="cmn_location" type="reference"/>
+        <element label="Metri quadri" max_length="40" name="metri_quadri" type="integer"/>
+        <element display="true" label="Nome" mandatory="true" max_length="32" name="nome" type="string"/>
+        <element label="Piano" max_length="40" name="piano" type="integer"/>
+        <index name="index">
+            <element name="indirizzo"/>
+        </index>
+    </element>
+</database>
