@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_248831_prenotazi.Prenotazione_check_availability</api_name>
+        <client_callable>true</client_callable>
+        <description/>
+        <name>Prenotazione_check_availability</name>
+        <script><![CDATA[var Prenotazione_check_availability = Class.create();
+Prenotazione_check_availability.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+    type: 'Prenotazione_check_availability',
+	prenotazioni: function (){
+		
+		//var dataora = new GlideDateTime().getDisplayValue();
+		var dataParam = this.getParameter('sysparm_start_data');
+		var dataObj = new GlideDateTime(dataParam);
+		var dataInizio = dataObj.getValue();
+		//gs.info('params ' + dataParam);
+		gs.info('include ' + dataInizio);
+		
+		var dataNumber = this.getParameter('sysparm_start_number');
+		var gdtNun = new GlideDateTime(); 
+		//gdtNun.setNumericValue(dataNumber);
+		gdtNun.subtract(gdtNun.getNumericValue());// gets the date to 0 
+		gdtNun.add(dataNumber);// The milliseconds you want to get in the date
+		gs.info('number: '+gdtNun);
+		
+		/*gdt.setDisplayValue(dateTimeForField, "yyyy-MM-dd HH:mm:ss");
+		var dataInizio = gdt.getDisplayValue(); //2017-08-18 08:00:00
+		gs.info('stringFinale: '+dateTimeForField);*/
+		
+		var prenotazioni = new GlideRecord ('x_248831_prenotazi_prenotazione_sale_table');
+		prenotazioni.addQuery('u_my_start_date','<', gdtNun);
+		prenotazioni.addQuery('u_my_end_date','>', gdtNun);
+		prenotazioni.query();
+		
+		if (prenotazioni.next()){
+			
+			var prenotante = prenotazioni.getValue('prenotante');
+			var d_ini = prenotazioni.getValue('u_my_start_date');
+			var d_fin = prenotazioni.getValue('u_my_end_date');
+			gs.info('data inizio GR ' + d_ini + ' data fine GR ' + d_fin);
+			var RitPos = this.newItem("ritorno");
+		    RitPos.setAttribute("message",'La sala è occupata da ' + prenotante 
+			+ ' da ' + d_ini + ' a ' + 'd_fin' + ' check calendario');
+		    RitPos.setAttribute("value",'true');
+			return RitPos;
+			
+		}else{
+			
+			var ritNeg = this.newItem("ritorno");
+		    ritNeg.setAttribute("message",'La sala è libera');
+		    ritNeg.setAttribute("value",'false');
+			return ritNeg;
+		}
+	}
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-08-17 13:40:35</sys_created_on>
+        <sys_id>dff885e437002300bbbc036973990e55</sys_id>
+        <sys_mod_count>41</sys_mod_count>
+        <sys_name>Prenotazione_check_availability</sys_name>
+        <sys_package display_value="Prenotazione sale" source="x_248831_prenotazi">182a595037731300bbbc036973990e4a</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Prenotazione sale">182a595037731300bbbc036973990e4a</sys_scope>
+        <sys_update_name>sys_script_include_dff885e437002300bbbc036973990e55</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-08-20 14:46:10</sys_updated_on>
+    </sys_script_include>
+</record_update>
