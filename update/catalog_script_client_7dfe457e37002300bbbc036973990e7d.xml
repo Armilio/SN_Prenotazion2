@@ -15,7 +15,7 @@
         <field/>
         <global>true</global>
         <messages/>
-        <name>Sala occupata startdate</name>
+        <name>Sala occupata enddate (portal)</name>
         <order/>
         <script><![CDATA[function onChange(control, oldValue, newValue, isLoading) {
 	if (newValue == '') {
@@ -23,19 +23,24 @@
 	}
 	
 	
-	var date_str = g_form.getValue('u_my_start_date');
+	var date_str = g_form.getValue('u_my_end_date');
 	var sala = g_form.getValue('sala');
 	//var dt_start = new Date(date_str);
 	console.log ('newValue: '+date_str);
 	
-	var date_number = getDateFromFormat(g_form.getValue('u_my_start_date'), g_user_date_time_format);
-	//var dateFormat = g_user_date_format.toUpperCase();
-	//var dateTimeFormat =g_user_date_time_format;// get the full date time format
-	//var newDateTimeFormat = dateFormat + dateTimeFormat.substring(dateFormat.length);// construct correct date time format where we strip the date and use the upcase version
 
-	//var date_number = moment(g_form.getValue('u_my_start_date'), g_user_date_time_format);//create date object using moments and correct date time format
+	var dateFormat = g_user_date_format.toUpperCase();
+	var dateTimeFormat =g_user_date_time_format;// get the full date time format
+	var newDateTimeFormat = dateFormat + dateTimeFormat.substring(dateFormat.length);// construct correct date time format where we strip the date and use the upcase version
+
+	var date_obj1 = moment(g_form.getValue('u_my_end_date'), newDateTimeFormat);//create date object using moments and correct date time format
+	var date_obj = new Date(date_obj1);
+	console.log ('date_obj '+ date_obj);
+	console.log ('date_obj_type '+ typeof date_obj);
+	
+	var date_number = date_obj.getTime();
 	console.log ('date_number '+ date_number);
-	console.log ('date_number_type' + typeof date_number);
+	console.log ('date_number_type '+ typeof date_number);
 
 	var ga = new GlideAjax('Prenotazione_check_availability') ;
 	ga.addParam('sysparm_name','prenotazioni');
@@ -43,47 +48,49 @@
 	ga.addParam('sysparm_start_number', date_number);
 	ga.addParam('sysparm_sala', sala);
 	ga.getXML(ajaxResponse); 
-	//alert(ga.getAnswer());
-
-	function ajaxResponse(serverResponse) { 
+	
+	
+	function ajaxResponse(serverResponse) {
+		
 		var ritorno = serverResponse.responseXML.getElementsByTagName("ritorno");
 		console.log (ritorno);
 		var message = ritorno[0].getAttribute("message");
 		var value = ritorno[0].getAttribute("value");
 		var pastdate = ritorno[0].getAttribute("pastdate");
 		console.log(message);
+		
 		if (pastdate == 'false'){
 			if (value == 'true'){
-				g_form.clearValue('u_my_start_date');
-				g_form.showFieldMsg('u_my_start_date','Sala già occupata! '+message,'info');
+				g_form.clearValue('u_my_end_date');
+				g_form.showFieldMsg('u_my_end_date','Sala già occupata! '+message,'info');
 			
 			}else{
-				g_form.showFieldMsg('u_my_start_date','Sala libera','info');
+				g_form.showFieldMsg('u_my_end_date','Sala libera','info');
 			}
 		}else{
 			g_form.clearValue('u_my_start_date');
-			g_form.showFieldMsg('u_my_start_date','hai scelto data nel passato','info');
+			g_form.showFieldMsg('u_my_end_date','hai scelto data nel passato','info');
 		}	
 	}
 }]]></script>
         <sys_class_name>catalog_script_client</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2018-08-06 11:14:21</sys_created_on>
+        <sys_created_on>2018-08-24 13:24:26</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
-        <sys_id>0120404d37331300bbbc036973990e49</sys_id>
-        <sys_mod_count>82</sys_mod_count>
-        <sys_name>Sala occupata startdate</sys_name>
+        <sys_id>7dfe457e37002300bbbc036973990e7d</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Sala occupata enddate (portal)</sys_name>
         <sys_overrides/>
         <sys_package display_value="Prenotazione sale" source="x_248831_prenotazi">182a595037731300bbbc036973990e4a</sys_package>
         <sys_policy/>
         <sys_scope display_value="Prenotazione sale">182a595037731300bbbc036973990e4a</sys_scope>
-        <sys_update_name>catalog_script_client_0120404d37331300bbbc036973990e49</sys_update_name>
+        <sys_update_name>catalog_script_client_7dfe457e37002300bbbc036973990e7d</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-08-24 11:48:08</sys_updated_on>
+        <sys_updated_on>2018-08-24 13:25:51</sys_updated_on>
         <table/>
         <type>onChange</type>
-        <ui_type>0</ui_type>
+        <ui_type>1</ui_type>
         <variable_set/>
         <view/>
     </catalog_script_client>

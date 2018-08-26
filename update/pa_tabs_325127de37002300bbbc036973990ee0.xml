@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update sys_domain="global" table="pa_tabs">
+    <pa_tabs action="INSERT_OR_UPDATE">
+        <canvas_page display_value="PA New Tab">b25127de37002300bbbc036973990ede</canvas_page>
+        <name>Dashboard</name>
+        <page display_value="PA Dashboard">765127de37002300bbbc036973990edd</page>
+        <sys_class_name>pa_tabs</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-08-23 10:47:05</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>325127de37002300bbbc036973990ee0</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Dashboard</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Prenotazione sale" source="x_248831_prenotazi">182a595037731300bbbc036973990e4a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Prenotazione sale">182a595037731300bbbc036973990e4a</sys_scope>
+        <sys_update_name>pa_tabs_325127de37002300bbbc036973990ee0</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-08-23 10:52:51</sys_updated_on>
+    </pa_tabs>
+</record_update>

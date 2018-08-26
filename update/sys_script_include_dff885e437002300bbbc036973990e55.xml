@@ -17,22 +17,34 @@ Prenotazione_check_availability.prototype = Object.extendsObject(global.Abstract
 		var dataObj = new GlideDateTime(dataParam);
 		var dataInizio = dataObj.getValue();
 		//gs.info('params ' + dataParam);
-		gs.info('include ' + dataInizio);
+		//gs.info('include ' + dataInizio);
 		
-		var dataNumber = this.getParameter('sysparm_start_number');
 		var gdtNun = new GlideDateTime(); 
-		//gdtNun.setNumericValue(dataNumber);
-		gdtNun.subtract(gdtNun.getNumericValue());// gets the date to 0 
-		gdtNun.add(dataNumber);// The milliseconds you want to get in the date
-		gs.info('number: '+gdtNun);
+		try {
+			var dataNumber = this.getParameter('sysparm_start_number');
+			gs.info('dataNumber: '+dataNumber);
+			gs.info('dataNumberType: '+ typeof dataNumber);
+			//gdtNun.setNumericValue(dataNumber);
+			gdtNun.subtract(gdtNun.getNumericValue());// gets the date to 0 
+			gdtNun.add(dataNumber);// The milliseconds you want to get in the date
+			gs.info('number: '+gdtNun);
+		}catch(err){
+			gs.info('number err: '+err);
+		}
+		var sala = this.getParameter('sysparm_sala');
 		
-		/*gdt.setDisplayValue(dateTimeForField, "yyyy-MM-dd HH:mm:ss");
-		var dataInizio = gdt.getDisplayValue(); //2017-08-18 08:00:00
-		gs.info('stringFinale: '+dateTimeForField);*/
+		var RitXML = this.newItem("ritorno");
+		var dateNow = new GlideDateTime();
+		if (gdtNun < dateNow){
+			RitXML.setAttribute("pastdate",'true');
+			return RitXML;
+		}
+		RitXML.setAttribute("pastdate",'false');
 		
 		var prenotazioni = new GlideRecord ('x_248831_prenotazi_prenotazione_sale_table');
 		prenotazioni.addQuery('u_my_start_date','<', gdtNun);
 		prenotazioni.addQuery('u_my_end_date','>', gdtNun);
+		prenotazioni.addQuery('sala', sala);
 		prenotazioni.query();
 		
 		if (prenotazioni.next()){
@@ -41,18 +53,15 @@ Prenotazione_check_availability.prototype = Object.extendsObject(global.Abstract
 			var d_ini = prenotazioni.getValue('u_my_start_date');
 			var d_fin = prenotazioni.getValue('u_my_end_date');
 			gs.info('data inizio GR ' + d_ini + ' data fine GR ' + d_fin);
-			var RitPos = this.newItem("ritorno");
-		    RitPos.setAttribute("message",'La sala è occupata da ' + prenotante 
-			+ ' da ' + d_ini + ' a ' + 'd_fin' + ' check calendario');
-		    RitPos.setAttribute("value",'true');
-			return RitPos;
+		    RitXML.setAttribute("message",'La sala è occupata da ore ' + d_ini + ' a ore ' + d_fin + ' controlla calendario');
+		    RitXML.setAttribute("value",'true');
+			return RitXML;
 			
 		}else{
 			
-			var ritNeg = this.newItem("ritorno");
-		    ritNeg.setAttribute("message",'La sala è libera');
-		    ritNeg.setAttribute("value",'false');
-			return ritNeg;
+		    RitXML.setAttribute("message",'La sala è libera');
+		    RitXML.setAttribute("value",'false');
+			return RitXML;
 		}
 	}
 });]]></script>
@@ -60,13 +69,13 @@ Prenotazione_check_availability.prototype = Object.extendsObject(global.Abstract
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-08-17 13:40:35</sys_created_on>
         <sys_id>dff885e437002300bbbc036973990e55</sys_id>
-        <sys_mod_count>41</sys_mod_count>
+        <sys_mod_count>56</sys_mod_count>
         <sys_name>Prenotazione_check_availability</sys_name>
         <sys_package display_value="Prenotazione sale" source="x_248831_prenotazi">182a595037731300bbbc036973990e4a</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Prenotazione sale">182a595037731300bbbc036973990e4a</sys_scope>
         <sys_update_name>sys_script_include_dff885e437002300bbbc036973990e55</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-08-20 14:46:10</sys_updated_on>
+        <sys_updated_on>2018-08-24 11:59:17</sys_updated_on>
     </sys_script_include>
 </record_update>

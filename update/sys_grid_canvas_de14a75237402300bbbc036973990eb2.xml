@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update node_type="sys_grid_canvas" unload_date="2018-08-26 12:29:21">
+    <sys_grid_canvas action="INSERT_OR_UPDATE">
+        <legacy_page display_value="PA New Tab 3">1a14a75237402300bbbc036973990eb2</legacy_page>
+        <name>PA New Tab 3</name>
+        <sys_class_name>sys_grid_canvas</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-08-23 10:59:04</sys_created_on>
+        <sys_id>de14a75237402300bbbc036973990eb2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>PA New Tab 3</sys_name>
+        <sys_package display_value="Prenotazione sale" source="x_248831_prenotazi">182a595037731300bbbc036973990e4a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Prenotazione sale">182a595037731300bbbc036973990e4a</sys_scope>
+        <sys_update_name>sys_grid_canvas_de14a75237402300bbbc036973990eb2</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-08-23 10:59:04</sys_updated_on>
+    </sys_grid_canvas>
+</record_update>
