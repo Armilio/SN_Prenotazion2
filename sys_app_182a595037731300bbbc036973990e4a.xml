@@ -23,14 +23,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-08-04 09:32:43</sys_created_on>
         <sys_id>182a595037731300bbbc036973990e4a</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>1</sys_mod_count>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-08-04 09:32:43</sys_updated_on>
+        <sys_updated_on>2018-08-27 09:51:59</sys_updated_on>
         <template/>
         <trackable>true</trackable>
         <user_role display_value="x_248831_prenotazi.user" name="x_248831_prenotazi.user">dc2a1d5037731300bbbc036973990ee1</user_role>
         <vendor/>
         <vendor_prefix/>
-        <version>1.0.0</version>
+        <version>1.1.0</version>
     </sys_app>
 </record_update>
