@@ -19,7 +19,7 @@
         <dynamic_default_value/>
         <dynamic_ref_qual/>
         <example_text/>
-        <field>sala</field>
+        <field/>
         <global>false</global>
         <help_tag>More information</help_tag>
         <help_text/>
@@ -33,25 +33,23 @@
         <lookup_unique>false</lookup_unique>
         <lookup_value/>
         <macro/>
-        <mandatory>true</mandatory>
-        <map_to_field>true</map_to_field>
+        <mandatory>false</mandatory>
+        <map_to_field>false</map_to_field>
         <mask_use_confirmation>false</mask_use_confirmation>
         <mask_use_encryption>false</mask_use_encryption>
-        <name>sala</name>
-        <order>100</order>
+        <name>check_local_sala</name>
+        <order>80</order>
         <price_if_checked>0</price_if_checked>
         <pricing_implications>false</pricing_implications>
-        <question_text>Sala da prenotare</question_text>
+        <question_text>Solo sale tua città</question_text>
         <read_roles/>
         <rec_lookup_price/>
         <rec_price_if_checked>0</rec_price_if_checked>
         <record/>
         <record_producer_table>x_248831_prenotazi_prenotazione_sale_table</record_producer_table>
-        <reference>x_248831_prenotazi_sale</reference>
-        <reference_qual>javascript: x_checkSale();</reference_qual>
-        <reference_qual_condition table="x_248831_prenotazi_sale">indirizzo.citySAMEASarredamento^EQ<item endquery="false" field="indirizzo.city" goto="false" newquery="false" operator="SAMEAS" or="false" value="arredamento"/>
-            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
-        </reference_qual_condition>
+        <reference/>
+        <reference_qual/>
+        <reference_qual_condition/>
         <scale_max>5</scale_max>
         <scale_min>0</scale_min>
         <show_help>false</show_help>
@@ -60,22 +58,22 @@
         <summary_macro/>
         <sys_class_name>item_option_new</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2018-08-04 09:51:12</sys_created_on>
-        <sys_id>722e599437731300bbbc036973990eb0</sys_id>
-        <sys_mod_count>13</sys_mod_count>
-        <sys_name>Sala da prenotare</sys_name>
+        <sys_created_on>2018-08-27 13:18:57</sys_created_on>
+        <sys_id>6f3a687337c02300bbbc036973990e9b</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Solo sale tua città</sys_name>
         <sys_package display_value="Prenotazione sale" source="x_248831_prenotazi">182a595037731300bbbc036973990e4a</sys_package>
         <sys_policy/>
         <sys_scope display_value="Prenotazione sale">182a595037731300bbbc036973990e4a</sys_scope>
-        <sys_update_name>item_option_new_722e599437731300bbbc036973990eb0</sys_update_name>
+        <sys_update_name>item_option_new_6f3a687337c02300bbbc036973990e9b</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-08-27 14:28:36</sys_updated_on>
+        <sys_updated_on>2018-08-27 14:04:26</sys_updated_on>
         <table/>
         <tooltip/>
-        <type>8</type>
+        <type>7</type>
         <ui_page/>
         <use_dynamic_default>false</use_dynamic_default>
-        <use_reference_qualifier>advanced</use_reference_qualifier>
+        <use_reference_qualifier>simple</use_reference_qualifier>
         <variable_name/>
         <variable_set/>
         <variable_width/>
@@ -86,22 +84,22 @@
         <visible_summary>true</visible_summary>
         <write_roles/>
     </item_option_new>
-    <sys_translated_text action="delete_multiple" query="documentkey=722e599437731300bbbc036973990eb0"/>
-    <fx_price action="delete_multiple" query="id=722e599437731300bbbc036973990eb0"/>
+    <sys_translated_text action="delete_multiple" query="documentkey=6f3a687337c02300bbbc036973990e9b"/>
+    <fx_price action="delete_multiple" query="id=6f3a687337c02300bbbc036973990e9b"/>
     <fx_price action="INSERT_OR_UPDATE">
         <amount>0</amount>
         <currency display_value="EUR">EUR</currency>
         <field>price_if_checked</field>
-        <id>722e599437731300bbbc036973990eb0</id>
+        <id>6f3a687337c02300bbbc036973990e9b</id>
         <parent/>
         <reference_amount>0</reference_amount>
         <reference_currency display_value="USD">USD</reference_currency>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2018-08-04 09:51:12</sys_created_on>
-        <sys_id>9f5e599437731300bbbc036973990ef6</sys_id>
+        <sys_created_on>2018-08-27 13:18:58</sys_created_on>
+        <sys_id>6a7ae87337c02300bbbc036973990edc</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-08-04 09:51:12</sys_updated_on>
+        <sys_updated_on>2018-08-27 13:18:58</sys_updated_on>
         <table>item_option_new</table>
         <type>calculated</type>
     </fx_price>
@@ -109,16 +107,16 @@
         <amount>0</amount>
         <currency display_value="EUR">EUR</currency>
         <field>rec_price_if_checked</field>
-        <id>722e599437731300bbbc036973990eb0</id>
+        <id>6f3a687337c02300bbbc036973990e9b</id>
         <parent/>
         <reference_amount>0</reference_amount>
         <reference_currency display_value="USD">USD</reference_currency>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2018-08-04 09:51:12</sys_created_on>
-        <sys_id>575e599437731300bbbc036973990ef6</sys_id>
+        <sys_created_on>2018-08-27 13:18:57</sys_created_on>
+        <sys_id>267ae87337c02300bbbc036973990edb</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-08-04 09:51:12</sys_updated_on>
+        <sys_updated_on>2018-08-27 13:18:57</sys_updated_on>
         <table>item_option_new</table>
         <type>calculated</type>
     </fx_price>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $location, $rootScope, spUtil, $interpolate) {
+  /* widget controller */
+  var c = this;
+	
+	$scope.tempo = $scope.data.myNowTime;
+	
+	
+	console.log('saleLibereObj ' + $scope.data.saleLibere);
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>sale_libere</id>
+        <internal>false</internal>
+        <link/>
+        <name>Sale libere</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+	
+	data.myNowTime = new GlideDateTime().getDisplayValue();
+	data.myDataObj = new GlideDateTime();
+	
+	data.saleLibere = [];
+	
+	var prenotazioni = new GlideRecord ('x_248831_prenotazi_prenotazione_sale_table');
+	prenotazioni.addQuery('u_my_start_date','>', data.myDataObj);
+	prenotazioni.query();
+	
+	
+	while (prenotazioni.next()){
+		
+		var salaItem = {};
+		//getRecordDisplayValues(Object data, GlideRecord from, String names)
+		$sp.getRecordDisplayValues(salaItem, prenotazioni, 'sala,number');
+		var nomeSala = salaItem.sala;
+		
+		data.saleLibere.push(salaItem);
+		
+	}
+	
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-08-28 08:29:40</sys_created_on>
+        <sys_id>32d1788037102300bbbc036973990e90</sys_id>
+        <sys_mod_count>66</sys_mod_count>
+        <sys_name>Sale libere</sys_name>
+        <sys_package display_value="Prenotazione sale" source="x_248831_prenotazi">182a595037731300bbbc036973990e4a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Prenotazione sale">182a595037731300bbbc036973990e4a</sys_scope>
+        <sys_update_name>sp_widget_32d1788037102300bbbc036973990e90</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-08-28 13:40:13</sys_updated_on>
+        <template><![CDATA[-<div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2 class="h4 panel-title">
+        <span>
+          <fa name="Sale libere" />
+        </span>Sale libere</h2>
+     
+    </div>
+		<div class="panel-body" >
+    	<h4>Tempo ora: {{tempo}}</h4>
+    	<ul>
+     		<li ng-repeat="item in c.data.saleLibere | unique:'sala'">
+       		<span class="pull-left">{{item.sala}}</span>
+        </li>
+    	</ul>
+		</div>
+    <div class="panel-footer">
+      <div class="h4 number-shown-label"></div>
+      <a class="pull-right"></a>
+    </div>
+  </div>]]></template>
+    </sp_widget>
+</record_update>
