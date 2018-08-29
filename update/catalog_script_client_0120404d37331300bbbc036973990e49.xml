@@ -39,7 +39,7 @@
 
 	var ga = new GlideAjax('Prenotazione_check_availability') ;
 	ga.addParam('sysparm_name','prenotazioni');
-	ga.addParam('sysparm_start_data', date_str);
+	ga.addParam('sysparm_start_data', date_str);//
 	ga.addParam('sysparm_start_number', date_number);
 	ga.addParam('sysparm_sala', sala);
 	ga.getXML(ajaxResponse); 
@@ -72,7 +72,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>0120404d37331300bbbc036973990e49</sys_id>
-        <sys_mod_count>82</sys_mod_count>
+        <sys_mod_count>83</sys_mod_count>
         <sys_name>Sala occupata startdate</sys_name>
         <sys_overrides/>
         <sys_package display_value="Prenotazione sale" source="x_248831_prenotazi">182a595037731300bbbc036973990e4a</sys_package>
@@ -80,7 +80,7 @@
         <sys_scope display_value="Prenotazione sale">182a595037731300bbbc036973990e4a</sys_scope>
         <sys_update_name>catalog_script_client_0120404d37331300bbbc036973990e49</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-08-24 11:48:08</sys_updated_on>
+        <sys_updated_on>2018-08-29 09:12:19</sys_updated_on>
         <table/>
         <type>onChange</type>
         <ui_type>0</ui_type>
