@@ -3,16 +3,21 @@
     <sys_script_include action="INSERT_OR_UPDATE">
         <access>public</access>
         <active>true</active>
-        <api_name>x_248831_prenotazi.checkSale</api_name>
+        <api_name>x_248831_prenotazi.x_checkSale</api_name>
         <client_callable>true</client_callable>
         <description/>
-        <name>checkSale</name>
+        <name>x_checkSale</name>
         <script><![CDATA[function x_checkSale() {
-	gs.info('dentro checkSale');
+	gs.info('dentro x_checkSale');
 	var checkBox = current.variables.check_local_sala;
+	
+	var tuaCitta = current.variables.prenotante.location.city;
+	gs.info('citta prenotante ' + tuaCitta);
+	
 	if (checkBox == 'true'){
 		gs.info('dentro checkBox true');
-		return 'indirizzo.citySAMEAScurrent.prenotante.location.city^EQ';
+		var qryString = 'indirizzo.city='+tuaCitta+'^EQ';
+		return qryString;
 	}else{
 		gs.info('dentro checkBox false');
 		return '';
@@ -22,13 +27,13 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-08-27 14:13:21</sys_created_on>
         <sys_id>9786fc3b37c02300bbbc036973990e50</sys_id>
-        <sys_mod_count>3</sys_mod_count>
-        <sys_name>checkSale</sys_name>
+        <sys_mod_count>14</sys_mod_count>
+        <sys_name>x_checkSale</sys_name>
         <sys_package display_value="Prenotazione sale" source="x_248831_prenotazi">182a595037731300bbbc036973990e4a</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Prenotazione sale">182a595037731300bbbc036973990e4a</sys_scope>
         <sys_update_name>sys_script_include_9786fc3b37c02300bbbc036973990e50</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-08-27 14:28:26</sys_updated_on>
+        <sys_updated_on>2018-08-29 15:32:03</sys_updated_on>
     </sys_script_include>
 </record_update>

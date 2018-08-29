@@ -48,8 +48,8 @@
         <record/>
         <record_producer_table>x_248831_prenotazi_prenotazione_sale_table</record_producer_table>
         <reference>x_248831_prenotazi_sale</reference>
-        <reference_qual>javascript: x_checkSale();</reference_qual>
-        <reference_qual_condition table="x_248831_prenotazi_sale">indirizzo.citySAMEASarredamento^EQ<item endquery="false" field="indirizzo.city" goto="false" newquery="false" operator="SAMEAS" or="false" value="arredamento"/>
+        <reference_qual>javascript: x_248831_prenotazi.x_checkSale();</reference_qual>
+        <reference_qual_condition table="x_248831_prenotazi_sale">indirizzo.city=Milan^EQ<item endquery="false" field="indirizzo.city" goto="false" newquery="false" operator="=" or="false" value="Milan"/>
             <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
         </reference_qual_condition>
         <scale_max>5</scale_max>
@@ -62,14 +62,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-08-04 09:51:12</sys_created_on>
         <sys_id>722e599437731300bbbc036973990eb0</sys_id>
-        <sys_mod_count>13</sys_mod_count>
+        <sys_mod_count>22</sys_mod_count>
         <sys_name>Sala da prenotare</sys_name>
         <sys_package display_value="Prenotazione sale" source="x_248831_prenotazi">182a595037731300bbbc036973990e4a</sys_package>
         <sys_policy/>
         <sys_scope display_value="Prenotazione sale">182a595037731300bbbc036973990e4a</sys_scope>
         <sys_update_name>item_option_new_722e599437731300bbbc036973990eb0</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-08-27 14:28:36</sys_updated_on>
+        <sys_updated_on>2018-08-29 15:29:56</sys_updated_on>
         <table/>
         <tooltip/>
         <type>8</type>
