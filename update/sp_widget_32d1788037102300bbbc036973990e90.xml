@@ -19,7 +19,7 @@
 	};
 	
 	c.data.dateBox = $scope.tempo;
-	c.server.update()
+	c.server.update();
 	
 	console.log('saleOccupateObj ' + $scope.data.saleOccupate);
 	console.log('tutteSaleArr ' + $scope.data.tutteSale);
@@ -114,14 +114,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-08-28 08:29:40</sys_created_on>
         <sys_id>32d1788037102300bbbc036973990e90</sys_id>
-        <sys_mod_count>200</sys_mod_count>
+        <sys_mod_count>202</sys_mod_count>
         <sys_name>Sale libere</sys_name>
         <sys_package display_value="Prenotazione sale" source="x_248831_prenotazi">182a595037731300bbbc036973990e4a</sys_package>
         <sys_policy/>
         <sys_scope display_value="Prenotazione sale">182a595037731300bbbc036973990e4a</sys_scope>
         <sys_update_name>sp_widget_32d1788037102300bbbc036973990e90</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-08-31 10:41:35</sys_updated_on>
+        <sys_updated_on>2018-08-31 10:59:43</sys_updated_on>
         <template><![CDATA[-<div class="panel panel-primary">
     <div class="panel-heading">
       <h2 class="h4 panel-title">
