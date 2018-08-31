@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $location, $rootScope, spUtil, $interpolate) {
+  /* widget controller */
+  var c = this;
+	
+	console.log('utente ' + $scope.data.utente);
+	console.log('prenArr ' + $scope.data.prenArr);
+	console.log('prenItem ' + $scope.data.PrenItem.sala);
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>mie_prenotazioni</id>
+        <internal>false</internal>
+        <link/>
+        <name>Mie prenotazioni</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+	
+	data.utente = gs.getUserID();
+	var rightNow = new GlideDateTime();
+	data.prenArr = [];
+	
+	var prenotazioni = new GlideRecord('x_248831_prenotazi_prenotazione_sale_table');
+	prenotazioni.addQuery('prenotante',data.utente);
+	prenotazioni.addQuery('u_my_end_date','>',rightNow);
+	prenotazioni.query();
+	
+	while(prenotazioni.next()){
+		
+		var prenItem = {};
+		
+		prenItem.utente = prenotazioni.getValue('prenotante');
+		prenItem.sala = prenotazioni.getDisplayValue('sala');
+		//prenItem.sala = salaObj.;
+		prenItem.startDate = prenotazioni.getValue('u_my_start_date');
+		prenItem.endDate = prenotazioni.getValue('u_my_end_date');
+		
+		data.prenArr.push(prenItem);
+		data.PrenItem = prenItem;
+	}
+	
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-08-30 08:57:10</sys_created_on>
+        <sys_id>455b07ec37102300bbbc036973990e03</sys_id>
+        <sys_mod_count>53</sys_mod_count>
+        <sys_name>Mie prenotazioni</sys_name>
+        <sys_package display_value="Prenotazione sale" source="x_248831_prenotazi">182a595037731300bbbc036973990e4a</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Prenotazione sale">182a595037731300bbbc036973990e4a</sys_scope>
+        <sys_update_name>sp_widget_455b07ec37102300bbbc036973990e03</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-08-30 10:53:38</sys_updated_on>
+        <template><![CDATA[-<div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2 class="h4 panel-title">
+        <span>
+          <fa name="Sale libere" />
+        </span>Mie prenotazioni</h2>
+     
+    </div>
+		<div class="panel-body" >
+    	<ul>
+     		<li ng-repeat="item in c.data.prenArr">
+          <span class="text-primary">{{item.sala}}</span>
+          <br>
+          <span class="text-muted">{{item.startDate}} — {{item.endDate}}</span>
+        </li>
+    	</ul>
+		</div>
+    <div class="panel-footer">
+      <div class="h4 number-shown-label"></div>
+      <a class="pull-right"></a>
+    </div>
+  </div>]]></template>
+    </sp_widget>
+</record_update>

@@ -11,6 +11,16 @@
 	$scope.libere = 'libere';
 	$scope.occupate = 'occupate';
 	
+	
+	c.delivery = {
+		displayValue: '',
+		value: '',
+		name: 'delivery'
+	};
+	
+	c.data.dateBox = $scope.tempo;
+	c.server.update()
+	
 	console.log('saleOccupateObj ' + $scope.data.saleOccupate);
 	console.log('tutteSaleArr ' + $scope.data.tutteSale);
 	console.log('saleOccupateDebug ' + $scope.data.OccDebug);
@@ -39,72 +49,79 @@
 	data.myNowTime = new GlideDateTime().getDisplayValue();
 	data.myDataObj = new GlideDateTime();
 	
-	data.saleOccupate = [];
-	data.tutteSale = [];
-	data.saleLibere = [];
+	if (input)	{
+		data.saleOccupate = [];
+		data.tutteSale = [];
+		data.saleLibere = [];
 		
-	var prenotazioni = new GlideRecord ('x_248831_prenotazi_prenotazione_sale_table');
-	/*prenotazioni.addQuery('u_my_start_date','>', data.myDataObj);
-	prenotazioni.query();*/	
-	prenotazioni.addQuery('u_my_start_date','<', data.myDataObj);
-	prenotazioni.addQuery('u_my_end_date','>', data.myDataObj);
-	prenotazioni.query();
+		console.log('dateBox ' + input.dateBox + ' type ' + typeof input.dateBox);
+			
+		var gdt = new GlideDateTime();
+		gdt.setDisplayValue(input.dateBox);
+		console.log('gdt ' + gdt);
+			
+		var prenotazioni = new GlideRecord ('x_248831_prenotazi_prenotazione_sale_table');
+		/*prenotazioni.addQuery('u_my_start_date','>', data.myDataObj);
+		prenotazioni.query();*/	
+		prenotazioni.addQuery('u_my_start_date','<', gdt);
+		prenotazioni.addQuery('u_my_end_date','>', gdt);
+		prenotazioni.query();
 	
-	while (prenotazioni.next()){	
-		var salaItem = {};
-		//getRecordDisplayValues(Object data, GlideRecord from, String names)
-		$sp.getRecordDisplayValues(salaItem, prenotazioni, 'sala,number,u_my_end_date');
+		while (prenotazioni.next()){	
+			var salaItem = {};
+			//getRecordDisplayValues(Object data, GlideRecord from, String names)
+			$sp.getRecordDisplayValues(salaItem, prenotazioni, 'sala,number,u_my_end_date');
 		
-		data.saleOccupate.push(salaItem);		
-	}
+			data.saleOccupate.push(salaItem);		
+		}
 	
-	var sale = new GlideRecord('x_248831_prenotazi_sale');
-	sale.addQuery();
-	sale.query();
+		var sale = new GlideRecord('x_248831_prenotazi_sale');
+		sale.addQuery();
+		sale.query();
 	
-	while (sale.next()){
-		var salaNome = '';
-		salaNome = sale.getValue('nome');
-		//$sp.getRecordDisplayValues(salaItem, prenotazioni, 'sala,number');
-		data.tutteSale.push(salaNome);
-	}	
-
-	//filtrare saleOccupate da TutteSale
-	
-	data.OccDebug = 'fuori';
-	data.itemOcc = {};
-	
-	for (var i=0; i<data.tutteSale.length; i++) {
-		var occupataBoo = 'false';
-		var sala = data.tutteSale[i];
-		data.saleOccupate.forEach(function(element) {
-			data.OccDebug = 'dentro';
-			data.itemOcc = element;
-			if(element.sala == sala){
-				data.OccDebug = 'dentro2';
-				occupataBoo = 'true';
-			}
-		});
-
-		if(occupataBoo == 'false'){
-			data.saleLibere.push(sala);
+		while (sale.next()){
+			var salaNome = '';
+			salaNome = sale.getValue('nome');
+			//$sp.getRecordDisplayValues(salaItem, prenotazioni, 'sala,number');
+			data.tutteSale.push(salaNome);
 		}	
-	}
+
+		//filtrare saleOccupate da TutteSale
 	
+		data.OccDebug = 'fuori';
+		data.itemOcc = {};
+	
+		for (var i=0; i<data.tutteSale.length; i++) {
+			var occupataBoo = 'false';
+			var sala = data.tutteSale[i];
+			data.saleOccupate.forEach(function(element) {
+				data.OccDebug = 'dentro';
+				data.itemOcc = element;
+				if(element.sala == sala){
+					data.OccDebug = 'dentro2';
+					occupataBoo = 'true';
+				}
+			});
+
+			if(occupataBoo == 'false'){
+				data.saleLibere.push(sala);
+			}	
+		}
+	}
 })();]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-08-28 08:29:40</sys_created_on>
         <sys_id>32d1788037102300bbbc036973990e90</sys_id>
-        <sys_mod_count>115</sys_mod_count>
+        <sys_mod_count>200</sys_mod_count>
         <sys_name>Sale libere</sys_name>
         <sys_package display_value="Prenotazione sale" source="x_248831_prenotazi">182a595037731300bbbc036973990e4a</sys_package>
         <sys_policy/>
         <sys_scope display_value="Prenotazione sale">182a595037731300bbbc036973990e4a</sys_scope>
         <sys_update_name>sp_widget_32d1788037102300bbbc036973990e90</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-08-29 14:02:16</sys_updated_on>
+        <sys_updated_on>2018-08-31 10:41:35</sys_updated_on>
         <template><![CDATA[-<div class="panel panel-primary">
     <div class="panel-heading">
       <h2 class="h4 panel-title">
@@ -114,7 +131,9 @@
      
     </div>
 		<div class="panel-body" >
-    	<h4 class="text-muted">Data: {{tempo}}</h4>
+    	<h4 class="text-muted">Data:</h4>
+      <sp-date-picker field="c.delivery" ng-model="c.data.dateBox" ng-model-options="{getterSetter: true}" ng-change="c.server.update()" sn-disabled="false" sn-include-time="true"></sp-date-picker>
+      <br>
       <div class="form-group">
         <label for="sel1">Vuoi vedere <font color="red">occupate</font> o <font color="green">libere?</font></label>
   			<select class="form-control" ng-model="select" id="sel1">
